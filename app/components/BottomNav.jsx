@@ -22,7 +22,7 @@ const BottomNav = () => {
 	}, [isMounted, pathname]);
 
 	return (
-		<footer className=' w-screen h-[10vh]  bg-gray-800 text-white  fixed bottom-0'>
+		<footer className=' z-50 w-screen h-[10vh]  bg-gray-800 text-white  fixed bottom-0'>
 			<nav className=' flex w-[90vw] md:w-[80vw] h-full mx-auto items-center justify-between capitalize'>
 				<Link
 					href='/'

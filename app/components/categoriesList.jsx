@@ -154,13 +154,13 @@ const CategoriesList = () => {
 	const [isActive, setIsActive] = useState('football');
 
 	return (
-		<div className=' w-full text-sm flex items-center justify-between'>
+		<div className=' w-full text-sm flex items-center justify-between gap-2'>
 			{categories.map((category, i) => (
 				<div
 					className={clsx(
 						' lg:flex flex-col items-center justify-center group/icons transition-all cursor-pointer hover:bg-black/25 py-2 px-4 hidden translate-y-0 delay-150 duration-300',
 						isActive === category.name &&
-							'scale-110 text-gray-300 transition-all bg-black/25'
+							' text-gray-300 transition-all bg-black/25'
 					)}
 					key={category.id}
 					onClick={() => setIsActive(category.name)}
@@ -183,8 +183,7 @@ const CategoriesList = () => {
 					<h3
 						className={clsx(
 							'  font-light group-hover/icons:scale-50  group-hover/icons:text-gray-300 duration-150 transition-all  delay-200',
-							isActive === category.name &&
-								'scale-110 text-gray-300 transition-all'
+							isActive === category.name && ' text-gray-300 transition-all'
 						)}
 					>
 						{category.name}
@@ -198,7 +197,7 @@ const CategoriesList = () => {
 								className={clsx(
 									' flex flex-col items-center justify-center group/icons transition-all cursor-pointer hover:bg-black/25 py-2 px-4 lg:hidden translate-y-0 delay-150 duration-300',
 									isActive === category.name &&
-										'scale-110 text-gray-300 transition-all bg-black/25'
+										' text-gray-300 transition-all bg-black/25'
 								)}
 								key={category.id}
 								onClick={() => setIsActive(category.name)}
@@ -232,7 +231,7 @@ const CategoriesList = () => {
 								className={clsx(
 									' flex flex-col items-center justify-center group/icons transition-all cursor-pointer hover:bg-black/25 py-2 px-4 lg:hidden translate-y-0 delay-150 duration-300',
 									isActive === category.name &&
-										'scale-110 text-gray-300 transition-all bg-black/25'
+										' text-gray-300 transition-all bg-black/25'
 								)}
 								key={category.id}
 								onClick={() => setIsActive(category.name)}

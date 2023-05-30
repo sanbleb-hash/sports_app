@@ -13,13 +13,14 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import CategoriesList from './categoriesList';
 import SearchComponent from './SearchComponent';
+import Link from 'next/link';
 
 const TopNav = () => {
 	const [isLatest, setIslatest] = useState(false);
 	const [isSearch, setIsSearch] = useState(false);
 
 	return (
-		<header className=' w-screen min-h-[10vh] lg:h-[8vh] bg-gray-800 text-white fixed top-0 flex items-center flex-col  gap-y-1  '>
+		<header className=' w-screen min-h-[10vh] lg:h-[8vh] bg-gray-800 text-white fixed z-50 top-0 flex items-center flex-col  gap-y-1  '>
 			<nav className=' flex w-[90vw] md:w-[80vw] min-h-[50px]  mx-auto items-center justify-between'>
 				<h2 className=' relative flex items-center gap-2 text-white text-sm font-semibold '>
 					<Image
@@ -29,7 +30,9 @@ const TopNav = () => {
 						width={100}
 						height={100}
 					/>
-					<p className=' text-sm capitalize'>sofaScoreKnockOff</p>
+					<Link href={'/'} className=' text-sm capitalize'>
+						sofaScoreKnockOff
+					</Link>
 				</h2>
 
 				<ul

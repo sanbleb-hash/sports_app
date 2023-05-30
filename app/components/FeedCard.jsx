@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiFootball } from 'react-icons/bi';
 
-const Feed = () => {
+const ActivePlay = () => {
 	return (
 		<div className=' w-[100px] h-[102px] bg-gradient-to-t bg-indigo-600 via-indigo-400 from-indigo-800 bg-cover relative rounded-lg flex flex-col items-center justify-between py-2 '>
 			<header className=' '>
@@ -30,4 +30,4 @@ const Feed = () => {
 	);
 };
 
-export default Feed;
+export default ActivePlay;
