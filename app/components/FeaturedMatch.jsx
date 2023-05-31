@@ -1,168 +1,101 @@
-import React from 'react';
-import { BiFootball } from 'react-icons/bi';
+'use client';
 
-const FeaturedMatch = () => {
-	const players = [
-		{
-			name: 'John Anderson',
-		},
-		{
-			name: 'Michael Baker',
-		},
-		{
-			name: 'David Clark',
-		},
-		{
-			name: 'Sarah Collins',
-		},
-		{
-			name: 'Tom Davis',
-		},
-		{
-			name: 'Jessica Evans',
-		},
-		{
-			name: 'Alex Foster',
-		},
-		{
-			name: 'Ryan Garcia',
-		},
-		{
-			name: 'Olivia Hernandez',
-		},
-		{
-			name: 'Jake Johnson',
-		},
-		{
-			name: 'Megan King',
-		},
-		{
-			name: 'Brandon Lee',
-		},
-		{
-			name: 'Emily Martinez',
-		},
-		{
-			name: 'Noah Nelson',
-		},
-		{
-			name: 'Chloe Owens',
-		},
-		{
-			name: 'Ethan Parker',
-		},
-		{
-			name: 'Lily Quinn',
-		},
-		{
-			name: 'Gabriel Rodriguez',
-		},
-		{
-			name: 'Madison Smith',
-		},
-		{
-			name: 'Daniel Thompson',
-		},
-	];
+import React from 'react';
+
+import { BsHeart } from 'react-icons/bs';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+
+const FeaturedMatch = ({ data, icon, isHeader }) => {
+	const router = useRouter();
 
 	return (
-		<div className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2 p-4 rounded-lg  '>
-			<header className=' w-full '>
-				<BiFootball className='  text-gray-500 text-xl z-10 relative ' />
+		<>
+			<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-4 rounded-lg  '>
+				{isHeader && (
+					<header className='w-full flex items-center justify-between '>
+						<div className=' w-full flex items-center gap-4 pb-2 '>
+							{/* country flag */}
+							<i className=' relative w-[30px] h-[30px] text-2xl p-1 rounded-full'>
+								<Image
+									src={data?.league?.logo || ''}
+									alt={data?.league?.country}
+									fill
+									className=' object-cover'
+								/>
+							</i>
+							<div className=' flex flex-col items-start capitalize '>
+								{/* country */}
+								<h2 className=' text-sm text-gray-500'>
+									{data?.league?.country}
+								</h2>
+								{/* competetion */}
+								<p className=' text-xs text-slate-400 truncate w-3/4'>
+									{data?.league?.name}
+								</p>
+							</div>
+						</div>
+						<div className=' border-l pl-4 border-gray-400'>
+							<BsHeart className=' text-gray-600' />
+						</div>
+					</header>
+				)}
 				<div
-					className=' flex justify-between w-full text-gray-500 
-             '
+					className='w-full flex items-center justify-between cursor-pointer hover:bg-transparent/5 transition-all px-2 border-b border-gray-500 pb-2 '
+					onClick={() => setTeamId(`${data?.fixture?.id}`)}
 				>
-					<small className='text-xl text-gray-500 capitalize'>wadan</small>
-					<span className=' flex items-center text-rose-400 gap-4 text-2xl'>
-						<small>0</small>-<small>3</small>
-					</span>
-					<small className='text-xl text-gray-500 capitalize'>bremen</small>
-				</div>
-			</header>
+					<div className=' w-full flex items-center gap-4 pb-2 '>
+						{/*time and status */}
+						<div className=' flex flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase '>
+							<span>15:00</span>
+							<span>
+								{data?.fixture?.periods === 'second'
+									? '2nd half'
+									: 'first'
+									? '1st half'
+									: ft}
+							</span>
+						</div>
 
-			<article
-				className=' w-full text-white
-            z-20 bg-black/30 px-2 rounded-lg
-           flex flex-col items-center justify-center '
-			>
-				<small className=' text-xs text-white text-center'>1.half</small>
-				<article className='  text-white flex w-full justify-between items-start p-4 '>
-					<div className=' flex flex-col gap-2'>
-						<span className='text-xs'>possesion</span>
-						<span className=' flex-1 border rounded-md p-2 text-[8px]'>
-							12% | 88%
-						</span>
-					</div>
-					<div className=' flex flex-col gap-2'>
-						<span className='text-xs'>shots</span>
-						<span className=' flex-1 border rounded-md p-2 text-[8px]'>
-							12 | 8
-						</span>{' '}
-					</div>
-					<div className=' flex flex-col gap-2 '>
-						<span className='text-xs'>on target</span>{' '}
-						<span className=' flex-1 border rounded-md p-2 text-[8px] self-end'>
-							1 | 0
-						</span>{' '}
-					</div>
-				</article>
-				<footer
-					className=' w-full text-white
-            z-20 bg-black/30 px-2 py-6 rounded-lg
-           flex items-center justify-center gap-2 '
-				>
-					<div className=' border-r border-gray-300 px-3'>
-						<h3 className=' text-sm font-semibold my-3 text-gray-400 text-center '>
-							1st 11
-						</h3>
-						<div className=' flex flex-col gap-2 text-xs text-ellipsis'>
-							{players.slice(0, 11).map((player, i) => (
-								<span key={i}>
-									{i + 1} .{player.name}
-								</span>
-							))}
-							<div className=' text-gray-400 text-xs'>
-								<h3 className=' text-sm font-semibold my-3'>subs</h3>
-								<div className=' flex flex-col items-start'>
-									{players
-										.slice(11, players.lastIndexOf(players))
-										.map((player, i) => (
-											<span key={i}>
-												{i + 1} .{player.name}
-											</span>
-										))}
-								</div>
-							</div>
+						<div className=' flex flex-col items-start justify-center capitalize  border-l  border-gray-400 '>
+							{/*team1 */}
+							<p
+								className=' text-xs z-20
+                   text-gray-400 text-start hover:underline'
+								onClick={() => router.push(`team/${data?.fixture?.id}`)}
+							>
+								{data?.teams?.home?.name || 'team1'}
+							</p>
+							{/* team2 */}
+							<p
+								className=' text-xs z-20
+                   text-start hover:underline  text-slate-600'
+								onClick={() => router.push(`team/${data?.fixture?.id}`)}
+							>
+								{data?.teams?.away?.name || 'team2'}
+							</p>
 						</div>
 					</div>
-					<div>
-						<h3 className=' text-sm font-semibold my-3 text-gray-400 text-center '>
-							1st 11
-						</h3>
-						<div className=' flex flex-col gap-2 text-xs text-ellipsis'>
-							{players.slice(0, 11).map((player, i) => (
-								<span key={i}>
-									{i + 1} .{player.name}
-								</span>
-							))}
-							<div className=' text-gray-400 text-xs'>
-								<h3 className=' text-sm font-semibold my-3'>subs</h3>
-								<div className=' flex flex-col items-start'>
-									{players
-										.slice(11, players.lastIndexOf(players))
-										.map((player, i) => (
-											<span key={i}>
-												{i + 1} .{player.name}
-											</span>
-										))}
-								</div>
-							</div>
+					{/* scoreline */}
+					<div className=' flex items-center'>
+						<div className=' flex flex-col items-start justify-center capitalize  border-r pr-4 border-gray-400 '>
+							{/*team1 score*/}
+							<p className=' text-xs text-gray-400 text-start'>
+								{data?.goals?.home || 1}
+							</p>
+							{/* team2 score */}
+							<p className=' text-xs text-start   text-slate-600'>
+								{data?.goals?.away || 0}
+							</p>
 						</div>
+
+						<div className=' '>{icon}</div>
 					</div>
-				</footer>
+				</div>
 			</article>
-		</div>
+
+			<hr className=' bg-white  h-[1/2px] my-7' />
+		</>
 	);
 };
 
