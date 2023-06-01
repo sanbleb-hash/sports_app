@@ -1,7 +1,7 @@
 // url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
 //   params: {live: 'all'},
 //   headers: {
-//     'X-RapidAPI-Key': 'bb4a8ccb4cmsh93cd0eafcfddca2p1a4292jsne18d9ef71428',
+//     'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
 //     'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
 //   }
 // // };
@@ -12,7 +12,7 @@
 // 	await fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures',{
 //   params: {live: 'all'},
 //   headers: {
-//     'X-RapidAPI-Key': 'bb4a8ccb4cmsh93cd0eafcfddca2p1a4292jsne18d9ef71428',
+//     'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
 //     'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
 //   }})
 // 		.then((result) => result.json())
@@ -7309,7 +7309,7 @@ const options = {
 	url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
 	params: { date: '2021-04-07' },
 	headers: {
-		'X-RapidAPI-Key': 'bb4a8ccb4cmsh93cd0eafcfddca2p1a4292jsne18d9ef71428',
+		'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
 		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
 	},
 };
@@ -7320,7 +7320,7 @@ const optionFixtureById = {
 	url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
 	params: { id: '157201' },
 	headers: {
-		'X-RapidAPI-Key': 'bb4a8ccb4cmsh93cd0eafcfddca2p1a4292jsne18d9ef71428',
+		'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
 		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
 	},
 };
@@ -7336,7 +7336,7 @@ const staticsOptions = {
 		team: '33',
 	},
 	headers: {
-		'X-RapidAPI-Key': 'bb4a8ccb4cmsh93cd0eafcfddca2p1a4292jsne18d9ef71428',
+		'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
 		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
 	},
 };
@@ -7351,7 +7351,7 @@ const standingsOptions = {
 		league: '39',
 	},
 	headers: {
-		'X-RapidAPI-Key': 'bb4a8ccb4cmsh93cd0eafcfddca2p1a4292jsne18d9ef71428',
+		'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
 		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
 	},
 };
