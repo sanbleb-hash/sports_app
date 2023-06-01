@@ -1,25 +1,17 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BsBell, BsClockFill, BsTrophy } from 'react-icons/bs';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import clsx from 'clsx';
+import { SearchContext } from '../libs/context/searchContext';
 
 const BottomNav = () => {
 	const pathname = usePathname();
 	const [isActive, setIsActive] = useState('/');
-
-	let isMounted = useRef(false);
-	useEffect(() => {
-		isMounted.current = true;
-		setIsActive(pathname);
-
-		return () => {
-			isMounted.current = false;
-		};
-	}, [isMounted, pathname]);
+	const { handleTogglement, togglemenu } = useContext(SearchContext);
 
 	return (
 		<footer className=' z-50 w-screen h-[10vh]  bg-gray-800 text-white  fixed bottom-0'>
@@ -69,10 +61,19 @@ const BottomNav = () => {
 					fevourites
 				</Link>
 				<button className=' flex items-center flex-col text-white text-sm group py-2 px-2 '>
-					<FaBars
-						size={18}
-						className=' group-hover:scale-110 transition delay-100 ease-in-out'
-					/>
+					{!togglemenu ? (
+						<FaBars
+							size={18}
+							className=' group-hover:scale-110 transition delay-100 ease-in-out'
+							onClick={() => handleTogglement(togglemenu)}
+						/>
+					) : (
+						<FaTimes
+							size={18}
+							className=' group-hover:scale-110 transition delay-100 ease-in-out'
+							onClick={() => handleTogglement(togglemenu)}
+						/>
+					)}
 					menu
 				</button>
 			</nav>

@@ -12,7 +12,7 @@ export default async function Home() {
 	const featureMatch = data.response.at(number(0, data.response.length));
 
 	return (
-		<section className=' grid grid-cols-3 gap-3 pt-40 pb-20 w-[80vw] shadow-lg mx-auto'>
+		<section className=' grid grid-cols-3 gap-3 pt-24  pb-32 w-[80vw] shadow-lg mx-auto'>
 			<HomePage data={data} featureMatch={featureMatch} />
 		</section>
 	);

@@ -1,23 +1,24 @@
 'use client';
 
 import {
-	BsChevronCompactDown,
 	BsFillClockFill,
 	BsClockHistory,
 	BsFillCalendar2CheckFill,
 	BsSearch,
 } from 'react-icons/bs';
-import { FaTimes, FaUser } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
-import CategoriesList from './categoriesList';
-import SearchComponent from './SearchComponent';
+
 import Link from 'next/link';
+import Sidemenu from './Sidemenu';
+import { SearchContext } from '../libs/context/searchContext';
 
 const TopNav = () => {
 	const [isLatest, setIslatest] = useState(false);
-	const [isSearch, setIsSearch] = useState(false);
+	const { isSearch, dispatch, togglemenu, handleTogglement } =
+		useContext(SearchContext);
 
 	return (
 		<header className=' w-screen min-h-[10vh] lg:h-[8vh] bg-gray-800 text-white fixed z-50 top-0 flex items-center flex-col  gap-y-1  '>
@@ -39,6 +40,16 @@ const TopNav = () => {
 					className=' flex items-center gap-4 object-cover
             '
 				>
+					<li className='  flex items-center text-white text-sm'>
+						<BsSearch
+							className=' text-sm'
+							onClick={() => {
+								handleTogglement(togglemenu);
+
+								dispatch(isSearch);
+							}}
+						/>
+					</li>
 					<li
 						className=' flex items-center gap- bg-transparent/20 rounded-full  w-[2rem]  '
 						onClick={() => setIslatest((prev) => !prev)}
@@ -54,14 +65,6 @@ const TopNav = () => {
 							)}
 						</button>
 					</li>
-					{!isSearch && (
-						<li className=' lg:hidden flex items-center text-white text-sm'>
-							<BsSearch
-								className=' text-sm'
-								onClick={() => setIsSearch(true)}
-							/>
-						</li>
-					)}
 
 					{isLatest ? (
 						<li className=' flex items-center text-white text-sm'>
@@ -72,30 +75,12 @@ const TopNav = () => {
 							all time
 						</span>
 					)}
-
 					<li>
 						<FaUser />
 					</li>
 				</ul>
 			</nav>
-			<nav
-				aria-label='secondary navigaton'
-				className=' flex min-h-[50px] w-full  h-full mx-auto items-center justify-between bg-gray-600'
-			>
-				<ul className=' flex items-center justify-center  w-[90vw] md:w-[80vw] mx-auto gap-4'>
-					{isSearch ? (
-						<>
-							<SearchComponent />
-							<FaTimes
-								className=' absolute hover:scale-110 hover:opacity-75 transition-all  md:right-6 right-3'
-								onClick={() => setIsSearch((prev) => !prev)}
-							/>
-						</>
-					) : (
-						<CategoriesList />
-					)}
-				</ul>
-			</nav>
+			{togglemenu && <Sidemenu />}
 		</header>
 	);
 };

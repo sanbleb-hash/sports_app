@@ -24,7 +24,7 @@ const Matches = ({ data, icon = null }) => {
 			<div className=' w-full  flex items-center gap-4 pb-2 '>
 				{/*time and status */}
 				<div
-					className=' hidden  md:flex flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
+					className=' hidden  lg:flex flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
 					onClick={() => setTeamId(`${data?.fixture?.id}`)}
 				>
 					<span>15:00</span>
@@ -38,7 +38,7 @@ const Matches = ({ data, icon = null }) => {
 				</div>
 
 				<div
-					className=' flex md:hidden flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
+					className=' flex lg:hidden flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
 					onClick={() => {
 						router.push(`/match-details?id=${data?.fixture?.id}`);
 					}}
@@ -53,12 +53,12 @@ const Matches = ({ data, icon = null }) => {
 					</span>
 				</div>
 
-				<div className=' flex flex-col items-start justify-center capitalize  border-l  border-gray-400 '>
+				<div className='hidden lg:flex flex-col items-start justify-center capitalize  border-l  border-gray-400 '>
 					{/*team1 */}
 					<p
 						className=' text-xs z-20
                    text-gray-400 text-start  cursor-pointer hover:underline'
-						onClick={() => router.push(`team/${data?.teams?.home?.id}`)}
+						onClick={() => setTeamId(`${data?.teams?.home?.id}`)}
 					>
 						{data?.teams?.home?.name || 'team1'}
 					</p>
