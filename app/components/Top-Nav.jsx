@@ -6,7 +6,7 @@ import {
 	BsFillCalendar2CheckFill,
 	BsSearch,
 } from 'react-icons/bs';
-import { FaUser } from 'react-icons/fa';
+import { FaTimes, FaUser } from 'react-icons/fa';
 
 import React, { useContext, useState } from 'react';
 import Image from 'next/image';
@@ -14,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Sidemenu from './Sidemenu';
 import { SearchContext } from '../libs/context/searchContext';
+import SearchComponent from './SearchComponent';
 
 const TopNav = () => {
 	const [isLatest, setIslatest] = useState(false);
@@ -41,14 +42,21 @@ const TopNav = () => {
             '
 				>
 					<li className='  flex items-center text-white text-sm'>
-						<BsSearch
-							className=' text-sm'
-							onClick={() => {
-								handleTogglement(togglemenu);
-
-								dispatch(isSearch);
-							}}
-						/>
+						{isSearch ? (
+							<FaTimes
+								className=' text-sm lg:hidden'
+								onClick={() => {
+									dispatch(isSearch);
+								}}
+							/>
+						) : (
+							<BsSearch
+								className=' text-sm md:text-lg'
+								onClick={() => {
+									dispatch(isSearch);
+								}}
+							/>
+						)}
 					</li>
 					<li
 						className=' flex items-center gap- bg-transparent/20 rounded-full  w-[2rem]  '
@@ -81,6 +89,7 @@ const TopNav = () => {
 				</ul>
 			</nav>
 			{togglemenu && <Sidemenu />}
+			{isSearch && <SearchComponent />}
 		</header>
 	);
 };

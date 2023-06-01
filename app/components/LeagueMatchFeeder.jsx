@@ -30,8 +30,8 @@ const LeagueMatchFeeder = ({ data, icon, isHeader }) => {
 
 						{/* games */}
 
-						{world.map((league) => (
-							<Matches key={league?.league?.id} data={league} />
+						{world.map((league, i) => (
+							<Matches key={i} data={league} />
 						))}
 					</>
 				</article>
