@@ -2,13 +2,10 @@
 
 import React from 'react';
 
-import { useRouter } from 'next/navigation';
 import Matches from './Matches';
 import MatchHeader from './MatchHeader';
 
 const LeagueMatchFeeder = ({ data, icon, isHeader }) => {
-	const router = useRouter();
-
 	const psl = data.filter((match) => match.league.country === 'South-Africa');
 	const epl = data.filter((match) => match.league.country === 'England');
 	const laliga = data.filter((match) => match.league.country === 'Spain');
@@ -21,7 +18,6 @@ const LeagueMatchFeeder = ({ data, icon, isHeader }) => {
 		(match) => match.league.country === 'Argentina'
 	);
 	const world = data.filter((match) => match.league.country === 'World');
-	console.log(serieA[0].league.flag);
 
 	return (
 		<>

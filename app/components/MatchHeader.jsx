@@ -3,7 +3,6 @@ import React from 'react';
 import { BsHeart } from 'react-icons/bs';
 
 const MatchHeader = ({ image, data }) => {
-	console.log(image);
 	return (
 		<header className='w-full flex items-center justify-between '>
 			<div className=' w-full flex items-center gap-4 pb-2 '>

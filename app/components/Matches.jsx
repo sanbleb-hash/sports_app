@@ -18,14 +18,30 @@ const Matches = ({ data, icon = null }) => {
 		});
 		router.push(newUrl);
 	}, [pathname, router, teamId]);
-	console.log(data);
+
 	return (
 		<div className='w-full flex items-center justify-between  hover:bg-transparent/5 transition-all px-2 border-b border-gray-500 pb-2 '>
 			<div className=' w-full  flex items-center gap-4 pb-2 '>
 				{/*time and status */}
 				<div
-					className=' flex flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
+					className=' hidden  md:flex flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
 					onClick={() => setTeamId(`${data?.fixture?.id}`)}
+				>
+					<span>15:00</span>
+					<span>
+						{data?.fixture?.periods === 'second'
+							? '2nd half'
+							: 'first'
+							? '1st half'
+							: ft}
+					</span>
+				</div>
+
+				<div
+					className=' flex md:hidden flex-col items-center justify-center text-xs font-medium text-gray-400 uppercase cursor-pointer '
+					onClick={() => {
+						router.push(`/match-details?id=${data?.fixture?.id}`);
+					}}
 				>
 					<span>15:00</span>
 					<span>

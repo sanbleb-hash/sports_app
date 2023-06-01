@@ -27,17 +27,17 @@ const Table = ({ data }) => {
 				<div className=' flex w-full  gap-3  items-center justify-between text-gray-400'>
 					<span>team</span>
 					<div className=' flex  items-center justify-between '>
-						<span className=' text-sm px-3 '>p</span>
-						<span className=' text-sm px-3 '>w</span>
-						<span className=' text-sm px-3 '>d</span>
-						<span className=' text-sm px-3 '>l</span>
-						<span className=' text-sm px-3 '>p</span>
+						<span className=' text-sm px-2 hidden lg:inline-block '>p</span>
+						<span className=' text-sm px-2 hidden lg:inline-block '>w</span>
+						<span className=' text-sm px-2 hidden lg:inline-block '>d</span>
+						<span className=' text-sm px-2 hidden lg:inline-block '>l</span>
+						<span className=' text-sm px-2 '>p</span>
 					</div>
 				</div>
 				{league.league.standings[0]?.map((team, i) => (
 					<div
 						key={i}
-						className=' flex items-start justify-between w-full odd:bg-black text-slate-300 cursor-pointer hover:bg-slate-400 '
+						className=' flex items-start justify-between w-full even:bg-transparent/30 text-slate-300 cursor-pointer hover:bg-slate-400 '
 						onClick={() =>
 							router.push(
 								`/team/${team.team.id}?leagueId=${league?.league?.id}`
@@ -45,18 +45,29 @@ const Table = ({ data }) => {
 						}
 					>
 						<div className=' flex items-start    text-slate-300  '>
-							<span className=' text-xs px-3 self-start '>{team?.rank}</span>
-							<span className=' text-xs px-3 self-start '>
+							<span className=' text-[8px] px-1 self-start '>{team?.rank}</span>
+							<span
+								title={team?.team?.name}
+								className=' text-xs px-2 self-start truncate w-[70px] '
+							>
 								{team?.team?.name}
 							</span>
 						</div>
 
 						<div className='  flex items-center self-end '>
-							<span className=' text-xs px-3 '>{team?.all?.played}</span>
-							<span className=' text-xs px-3 '>{team?.all?.win}</span>
-							<span className=' text-xs px-3 '>{team?.all?.draw}</span>
-							<span className=' text-xs px-3 '>{team?.all?.lose}</span>
-							<span className=' text-xs px-3 '>{team?.points}</span>
+							<span className=' text-xs px-2 hidden lg:inline-block '>
+								{team?.all?.played}
+							</span>
+							<span className=' text-xs px-2 hidden lg:inline-block '>
+								{team?.all?.win}
+							</span>
+							<span className=' text-xs px-2 hidden lg:inline-block '>
+								{team?.all?.draw}
+							</span>
+							<span className=' text-xs px-2 hidden lg:inline-block '>
+								{team?.all?.lose}
+							</span>
+							<span className=' text-xs px-2 '>{team?.points}</span>
 						</div>
 					</div>
 				))}

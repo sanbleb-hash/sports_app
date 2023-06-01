@@ -13,7 +13,7 @@ const RecentForm = ({ data }) => {
 						<span
 							key={i}
 							className={clsx(
-								' p-1 text-xs  text-white rounded-md ',
+								' p-1 text-[10px]  text-white rounded-md ',
 								x === 'W'
 									? 'bg-green-400'
 									: x === 'L'
