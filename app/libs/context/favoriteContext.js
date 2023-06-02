@@ -7,7 +7,7 @@ export const FavoriteContext = createContext();
 const initialState = {
 	favored: false,
 	isLoading: false,
-	favorites: [],
+	favorites: JSON.parse(localStorage.getItem('favorites')) || [],
 };
 
 const reducer = (state, action) => {
@@ -18,21 +18,26 @@ const reducer = (state, action) => {
 				isLoading: true,
 			};
 		case 'Favoring': {
-			const newFavorite = action.payload;
+			const existingItem = state.favorites.find(
+				(item) => action.payload.id === item.id
+			);
+			if (existingItem) {
+				// 'remove it from state');
+				state.isLoading = false;
+				const updatedFavorites = state.favorites.filter(
+					(item) => item.id !== action.payload.id
+				);
+				if (updatedFavorites)
+					localStorage.removeItem('favorites', updatedFavorites);
 
-			const existingFavorite = state.favorites.find((f) => f === newFavorite);
-			if (existingFavorite) {
-				state.favored = false;
-				state.favorites.pop((f) => f === existingFavorite);
-				return { ...state };
+				return { ...state, favorites: updatedFavorites };
 			} else {
-				state.favored = true;
-				const favorites = existingFavorite
-					? state.favirites.map((item) =>
-							item === existingFavorite ? newItem : item
-					  )
-					: [...state.favorites, newFavorite];
-				return { ...state, favored: true, favorites };
+				// add a league to favorite
+				state.isLoading = false;
+				const updatedFavorites = state.favorites.concat(action.payload);
+				if (updatedFavorites)
+					localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+				return { ...state, favorites: updatedFavorites };
 			}
 		}
 		default:

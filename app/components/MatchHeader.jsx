@@ -1,22 +1,41 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { ImSpinner2 } from 'react-icons/im';
 import { FavoriteContext } from '../libs/context/favoriteContext';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 const MatchHeader = ({ image, data }) => {
-	const { state, dispatch } = useContext(FavoriteContext);
+	const [favored, setFavored] = useState(false);
+	const router = useRouter();
 
-	console.log(state);
+	const {
+		state: { favorites },
+		isLoading,
+		dispatch,
+	} = useContext(FavoriteContext);
+
 	const handleFavoring = (id) => {
 		dispatch({
-			type: 'Favoring',
-			payload: id,
+			type: 'FavorIngStart',
 		});
-		console.log(id);
+		const { league } = data?.find((item) => item?.league?.id === id);
+
+		dispatch({
+			type: 'Favoring',
+			payload: { ...league },
+		});
 	};
+	const itemId = data[0]?.league?.id;
+
+	useEffect(() => {
+		if (favorites?.some((favorite) => favorite?.id === itemId))
+			setFavored(true);
+		console.log(itemId);
+	}, [itemId, favorites]);
 
 	return (
 		<header className='w-full flex items-center justify-between '>
@@ -40,20 +59,20 @@ const MatchHeader = ({ image, data }) => {
 				</div>
 			</div>
 			<div className=' border-l pl-4 border-gray-400'>
-				{state?.favored === true ? (
+				{isLoading ? (
+					<ImSpinner2 className='text-lg text-gray-500 animate-spin' />
+				) : favored ? (
 					<BsHeartFill
-						className={clsx(
-							' text-red-500',
-							state?.favored === true ? ' text-red-500' : ''
-						)}
+						className={clsx(' text-red-500', favored ? ' text-red-500' : '')}
+						onClick={() => {
+							handleFavoring(itemId);
+							router.refresh();
+						}}
 					/>
 				) : (
 					<BsHeart
-						className={clsx(
-							' text-gray-600',
-							state?.favored === true ? ' text-red-500' : ''
-						)}
-						onClick={() => handleFavoring(data[0]?.league?.id)}
+						className={clsx(' text-gray-600')}
+						onClick={() => handleFavoring(itemId)}
 					/>
 				)}
 			</div>
