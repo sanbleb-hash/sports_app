@@ -8,9 +8,10 @@ import { FavoriteContext } from '../libs/context/favoriteContext';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 
-const MatchHeader = ({ image, data }) => {
+const MatchHeader = ({ data }) => {
 	const [favored, setFavored] = useState(false);
 	const router = useRouter();
+	console.log(data);
 
 	const {
 		state: { favorites },
@@ -29,12 +30,17 @@ const MatchHeader = ({ image, data }) => {
 			payload: { ...league },
 		});
 	};
-	const itemId = data[0]?.league?.id;
+
+	// fields initialisation
+
+	const image = data[0]?.league?.flag || data?.league?.flag;
+	const itemId = data[0]?.league?.id || data?.league?.id;
+	const countryName = data[0]?.league?.country || data?.league?.country;
+	const leagueName = data[0]?.league?.league || data?.league?.league;
 
 	useEffect(() => {
 		if (favorites?.some((favorite) => favorite?.id === itemId))
 			setFavored(true);
-		console.log(itemId);
 	}, [itemId, favorites]);
 
 	return (
@@ -43,19 +49,17 @@ const MatchHeader = ({ image, data }) => {
 				{/* country flag */}
 				<i className=' relative w-[30px] h-[30px] text-2xl p-1 rounded-full overflow-hidden border border-gray-500 drop-shadow-lg'>
 					<Image
-						src={data[0]?.league?.flag || image}
-						alt={data[0]?.league?.country}
+						src={image}
+						alt='country flag'
 						fill
 						className=' object-cover'
 					/>
 				</i>
 				<div className=' flex flex-col items-start capitalize '>
 					{/* country */}
-					<h2 className=' text-sm text-gray-500'>{data[0]?.league?.country}</h2>
+					<h2 className=' text-sm text-gray-500'>{countryName}</h2>
 					{/* competetion */}
-					<p className=' text-xs text-slate-400 truncate w-3/4'>
-						{data[0]?.league?.name}
-					</p>
+					<p className=' text-xs text-slate-400 truncate w-3/4'>{leagueName}</p>
 				</div>
 			</div>
 			<div className=' border-l pl-4 border-gray-400'>

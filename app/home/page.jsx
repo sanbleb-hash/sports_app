@@ -27,7 +27,7 @@ const HomePage = ({ data, featureMatch }) => {
 				<Calender />
 			</aside>
 			<section className=' col-span-3 md:col-span-2 lg:col-span-1 min-h-full  bg-slate-700 rounded-lg p-5'>
-				<LeagueMatchFeeder data={data.response} icon={icon} isHeader />
+				<LeagueMatchFeeder data={data?.response} icon={icon} isHeader />
 			</section>
 			<aside className=' hidden lg:block  col-span-1 min-h-[40vh]  bg-slate-700 rounded-lg p-5'>
 				{showDetails === true ? (

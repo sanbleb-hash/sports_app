@@ -1,5 +1,5 @@
-import { fixtures } from './actions/fixtureActions';
-import HomePage from './home/page';
+import { fixtures } from '../actions/fixtureActions';
+import HomePage from '../home/page';
 
 export default async function Home() {
 	const data = await fixtures;

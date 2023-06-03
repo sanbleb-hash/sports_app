@@ -53,7 +53,7 @@ const Matches = ({ data, icon = null }) => {
 					</span>
 				</div>
 
-				<div className='hidden lg:flex flex-col items-start justify-center capitalize  border-l  border-gray-400 '>
+				<div className='flex flex-col items-start justify-center capitalize  border-l  border-gray-400 '>
 					{/*team1 */}
 					<p
 						className=' text-xs z-20
