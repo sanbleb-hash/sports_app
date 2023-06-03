@@ -12,6 +12,10 @@ const BottomNav = () => {
 	const pathname = usePathname();
 	const [isActive, setIsActive] = useState('/');
 	const { handleTogglement, togglemenu } = useContext(SearchContext);
+	// setting the activePath
+	useEffect(() => {
+		setIsActive(pathname);
+	}, [pathname]);
 
 	return (
 		<footer className=' z-50 w-screen h-[10vh]  bg-gray-800 text-white  fixed bottom-0'>
