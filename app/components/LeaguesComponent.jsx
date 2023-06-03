@@ -21,7 +21,7 @@ const LeaguesComponent = () => {
 	const dataFrom = Array.from(new Set(leagues.response));
 
 	return (
-		<div className='w-full bg-gray-700 flex flex-col gap-3 p-5'>
+		<div className=' xl:max-w-[80%] w-full bg-gray-700 flex flex-col gap-3 p-5'>
 			{dataFrom.map((country, i) => (
 				<div
 					key={i}
