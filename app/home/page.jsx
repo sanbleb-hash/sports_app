@@ -31,7 +31,7 @@ const HomePage = ({ data, featureMatch }) => {
 			</section>
 			<aside className=' hidden lg:block  col-span-1 min-h-[40vh]  bg-slate-700 rounded-lg p-5'>
 				{showDetails === true ? (
-					<MatchDetails id={id} name={name} />
+					<MatchDetails id={id} />
 				) : (
 					<FeaturedMatch data={featureMatch} isHeader />
 				)}

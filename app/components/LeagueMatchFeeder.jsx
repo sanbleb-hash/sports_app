@@ -1,166 +1,57 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Matches from './Matches';
 import MatchHeader from './MatchHeader';
 
 const LeagueMatchFeeder = ({ data, icon, isHeader }) => {
-	// leage cards
-	const psl = data?.filter((match) => match.league.country === 'South-Africa');
-	const epl = data?.filter((match) => match.league.country === 'England');
-	const laliga = data?.filter((match) => match.league.country === 'Spain');
-	const bundesliga = data?.filter(
-		(match) => match.league.country === 'Germany'
-	);
-	const ligueA = data?.filter((match) => match.league.country === 'France');
-	const serieA = data?.filter((match) => match.league.country === 'Italy');
-	const brazil = data?.filter((match) => match.league.country === 'Brazil');
-	const mexico = data?.filter((match) => match.league.country === 'Mexico');
-	const argentina = data?.filter(
-		(match) => match.league.country === 'Argentina'
-	);
-	const world = data?.filter((match) => match.league.country === 'World');
+	const [countries, setCountries] = useState([]);
+
+	useEffect(() => {
+		const distinctCountries = data?.reduce((acc, favorite) => {
+			if (!acc.includes(favorite.country)) {
+				acc.push(favorite);
+			}
+
+			return acc;
+		}, []);
+		setCountries(distinctCountries);
+	}, [data]);
+
+	// initialising country categories
+	let leagues = [];
+
+	countries.map((country, i) => {
+		const newList = data.filter(
+			(fixture) => fixture.league.country === country?.league?.country
+		);
+		leagues.push(newList);
+	});
 
 	return (
-		<>
-			{world?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && <MatchHeader data={world} />}
+		<article className='  flex flex-col w-full min-h-[40vh] bg-inherit items-center rounded-lg mb-3  '>
+			{countries &&
+				data?.length > 0 &&
+				countries.map((country, i) => (
+					<div
+						key={i}
+						className='flex flex-col w-full min-w-[280px] max-w-[320px] min-h-[10vh] bg-slate-300 items-center gap-4 p-1 rounded-lg mb-5'
+					>
+						<MatchHeader data={[country]} />
+						{countries
+							.filter(
+								(fixture) =>
+									fixture.league.country === country?.league?.country &&
+									fixture.league.name === country?.league?.name
+							)
 
-						{/* games */}
-
-						{world?.map((league, i) => (
-							<Matches key={i} data={league} />
-						))}
-					</>
-				</article>
-			)}
-
-			{epl?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && <MatchHeader data={epl} />}
-
-						{/* games */}
-
-						{epl?.map((league) => (
-							<Matches key={league?.league?.id} data={league} />
-						))}
-					</>
-				</article>
-			)}
-
-			{laliga?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && <MatchHeader data={laliga} />}
-
-						{/* games */}
-						{laliga?.map((league) => (
-							<Matches key={league?.league?.id} data={league} />
-						))}
-					</>
-				</article>
-			)}
-			{bundesliga?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && (
-							<MatchHeader
-								data={bundesliga}
-								image={bundesliga[0]?.league?.flag}
-							/>
-						)}
-
-						{/* games */}
-
-						{bundesliga?.map((league) => (
-							<Matches key={league?.league?.id} data={league} />
-						))}
-					</>
-				</article>
-			)}
-
-			{serieA?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					{
-						<>
-							{isHeader && <MatchHeader data={serieA} />}
-
-							{/* games */}
-							{serieA?.map((league) => (
-								<Matches key={league?.league?.id} data={league} />
+							.map((country, i) => (
+								<Matches key={i} data={country} />
 							))}
-						</>
-					}
-				</article>
-			)}
-
-			{ligueA?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					{<>{isHeader && <MatchHeader data={ligueA} />}</>}
-					{ligueA?.map((league) => (
-						<Matches key={league?.league.id} data={league} />
-					))}
-				</article>
-			)}
-			{psl?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					{
-						<>
-							{isHeader && <MatchHeader data={psl} />}
-
-							{/* games */}
-							{psl?.map((league) => (
-								<Matches key={league?.league?.id} data={league} />
-							))}
-						</>
-					}
-				</article>
-			)}
-			{brazil?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && <MatchHeader data={brazil} />}
-
-						{/* games */}
-						{brazil?.map((league) => (
-							<Matches key={league?.league?.id} data={league} />
-						))}
-					</>
-				</article>
-			)}
-
-			{argentina?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && <MatchHeader data={argentina} />}
-
-						{/* games */}
-						{argentina?.map((league) => (
-							<Matches key={league?.league?.id} data={league} />
-						))}
-					</>
-				</article>
-			)}
-			{mexico?.length > 0 && (
-				<article className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2   p-1 rounded-lg mb-3  '>
-					<>
-						{isHeader && <MatchHeader data={mexico} />}
-
-						{/* games */}
-
-						{mexico?.map((league) => (
-							<Matches key={league?.league.id} data={league} />
-						))}
-					</>
-				</article>
-			)}
-
-			<hr className=' bg-white  h-[1/2px] my-7' />
-		</>
+					</div>
+				))}
+		</article>
 	);
 };
 

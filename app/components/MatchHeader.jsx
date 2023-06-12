@@ -11,7 +11,6 @@ import { useRouter } from 'next/navigation';
 const MatchHeader = ({ data }) => {
 	const [favored, setFavored] = useState(false);
 	const router = useRouter();
-	console.log(data);
 
 	const {
 		state: { favorites },
@@ -36,7 +35,7 @@ const MatchHeader = ({ data }) => {
 	const image = data[0]?.league?.flag || data?.league?.flag;
 	const itemId = data[0]?.league?.id || data?.league?.id;
 	const countryName = data[0]?.league?.country || data?.league?.country;
-	const leagueName = data[0]?.league?.league || data?.league?.league;
+	const leagueName = data[0]?.league?.name || data?.league?.name;
 
 	useEffect(() => {
 		if (favorites?.some((favorite) => favorite?.id === itemId))
@@ -59,7 +58,7 @@ const MatchHeader = ({ data }) => {
 					{/* country */}
 					<h2 className=' text-sm text-gray-500'>{countryName}</h2>
 					{/* competetion */}
-					<p className=' text-xs text-slate-400 truncate w-3/4'>{leagueName}</p>
+					<p className=' text-xs text-slate-400 truncate'>{leagueName}</p>
 				</div>
 			</div>
 			<div className=' border-l pl-4 border-gray-400'>

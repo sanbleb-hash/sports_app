@@ -57,7 +57,7 @@ const FeaturedMatch = ({ data, icon, isHeader }) => {
 							</span>
 						</div>
 
-						<div className=' flex flex-col items-start justify-center capitalize  border-l  border-gray-400 '>
+						<div className=' flex flex-col items-start justify-center capitalize  border-l  border-gray-400 pl-2 '>
 							{/*team1 */}
 							<p
 								className=' text-xs z-20

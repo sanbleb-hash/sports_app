@@ -6,9 +6,8 @@ import { BsHeart, BsPinFill } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 
 const MatchFeeder = ({ data, icon, isHeader }) => {
-	console.log(data);
-
 	const router = useRouter();
+	console.log(data);
 
 	return (
 		<>

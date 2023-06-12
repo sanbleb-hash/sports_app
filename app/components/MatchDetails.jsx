@@ -22,6 +22,7 @@ const MatchDetails = ({ id }) => {
 
 	const router = useRouter();
 	const players = fixtureLineups.response;
+	console.log(fixture);
 
 	return (
 		<div className='  flex flex-col w-full min-h-[10vh] bg-slate-300 items-center gap-2 p-4 rounded-lg  '>
@@ -76,7 +77,9 @@ const MatchDetails = ({ id }) => {
             z-20 bg-black/30 px-2 rounded-lg
            flex flex-col items-center justify-center '
 			>
-				<small className=' text-xs text-white text-center'>1.half</small>
+				<small className=' text-xs text-white text-center'>
+					{fixture?.fixture?.status?.short}
+				</small>
 				<article className='  text-white flex w-full justify-between items-start p-4 '>
 					<div className=' flex flex-col gap-2'>
 						<span className='text-xs'>possesion</span>

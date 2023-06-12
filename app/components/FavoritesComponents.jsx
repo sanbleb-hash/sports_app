@@ -7,7 +7,6 @@ import Matches from './Matches';
 import { fixtures } from '../actions/fixtureActions';
 import { useSearchParams } from 'next/navigation';
 import MatchDetails from './MatchDetails';
-import FeaturedMatch from './FeaturedMatch';
 
 const FavoritesComponents = () => {
 	const [countries, setCountries] = useState([]);
